@@ -4,7 +4,7 @@ const { BinarySearchTree, TreeNode } = require('./binary-search-tree.js');
 
 // Practice problems on binary trees
 
-function findMinBST (rootNode) {
+function findMinBST(rootNode) {
   let curr = rootNode;
 
   while (curr.left) {
@@ -14,7 +14,7 @@ function findMinBST (rootNode) {
   return curr.val;
 }
 
-function findMaxBST (rootNode) {
+function findMaxBST(rootNode) {
   let curr = rootNode;
 
   while (curr.right) {
@@ -24,7 +24,7 @@ function findMaxBST (rootNode) {
   return curr.val;
 }
 
-function findMinBT (rootNode) {
+function findMinBT(rootNode) {
   // const queue = [rootNode];
   // let min = Infinity;
 
@@ -58,7 +58,7 @@ function findMinBT (rootNode) {
   return min;
 }
 
-function findMaxBT (rootNode) {
+function findMaxBT(rootNode) {
 
   if (!rootNode) return;
 
@@ -72,53 +72,69 @@ function findMaxBT (rootNode) {
   return max;
 }
 
-function getHeight (rootNode) {
+function getHeight(rootNode) {
   if (!rootNode) return -1;
 
-  // let height = 0;
+  let height = 0;
 
 
 
-  // const queue = [rootNode];
-  // queue.push(null);
+  const queue = [rootNode];
+  queue.push(null);
 
-  // while (queue.length) {
+  while (queue.length) {
 
-  //   let node = queue.shift();
+    let node = queue.shift();
 
-  //   if (node === null) {
-  //     height++;
-  //   }
+    if (node === null) {
+      height++;
+    }
 
-  //   if (node !== null) {
-  //     if (node.left) {
-  //       queue.push(node.left);
-  //     }
+    if (node !== null) {
+      if (node.left) {
+        queue.push(node.left);
+      }
 
-  //     if (node.right) {
-  //       queue.push(node.right);
-  //     }
-  //   }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
 
-  //   else if (queue.length) {
-  //     queue.push(null);
-  //   }
+    else if (queue.length) {
+      queue.push(null);
+    }
 
-  // }
+  }
 
-  // return height - 1;
+  return height - 1;
 
-  let left = getHeight(rootNode.left);
-  let right = getHeight(rootNode.right);
+  // let left = getHeight(rootNode.left);
+  // let right = getHeight(rootNode.right);
 
-  return Math.max(left, right) + 1;
+  // return Math.max(left, right) + 1;
 }
 
-function balancedTree (rootNode) {
-  // Your code here
+function balancedTree(rootNode) {
+  if (!rootNode) return true;
+  const queue = [rootNode]
+  while (queue.length) {
+    let node = queue.shift()
+    if (getHeight(node.left) > getHeight(node.right) + 1
+      || getHeight(node.right) > getHeight(node.left) + 1) {
+      return false
+    }
+
+    if (node.left) {
+      queue.push(node.left)
+    }
+    if (node.right) {
+      queue.push(node.right)
+    }
+  }
+  return true
 }
 
-function countNodes (rootNode) {
+function countNodes(rootNode) {
   if (!rootNode) return -1;
 
   let count = 0;
@@ -142,11 +158,11 @@ function countNodes (rootNode) {
   return count;
 }
 
-function getParentNode (rootNode, target) {
+function getParentNode(rootNode, target) {
   // Your code here
 }
 
-function inOrderPredecessor (rootNode, target) {
+function inOrderPredecessor(rootNode, target) {
   // Your code here
 }
 
@@ -175,14 +191,14 @@ function deleteNodeBST(rootNode, target) {
 }
 
 module.exports = {
-    findMinBST,
-    findMaxBST,
-    findMinBT,
-    findMaxBT,
-    getHeight,
-    countNodes,
-    balancedTree,
-    getParentNode,
-    inOrderPredecessor,
-    deleteNodeBST
+  findMinBST,
+  findMaxBST,
+  findMinBT,
+  findMaxBT,
+  getHeight,
+  countNodes,
+  balancedTree,
+  getParentNode,
+  inOrderPredecessor,
+  deleteNodeBST
 }
