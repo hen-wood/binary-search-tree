@@ -75,16 +75,43 @@ function findMaxBT (rootNode) {
 function getHeight (rootNode) {
   if (!rootNode) return -1;
 
-  // initialize let left = rootNode.left
-  // same for right = rootNode.right
-  // while either exist, continue reassigning their values
-  // break out of loop when reach end
-  // keep counter to tell height
-  while (rootNode.left || rootNode.right) {
-    if (rootNode.left) {
-      //
-    }
-  }
+  // let height = 0;
+
+
+
+  // const queue = [rootNode];
+  // queue.push(null);
+
+  // while (queue.length) {
+
+  //   let node = queue.shift();
+
+  //   if (node === null) {
+  //     height++;
+  //   }
+
+  //   if (node !== null) {
+  //     if (node.left) {
+  //       queue.push(node.left);
+  //     }
+
+  //     if (node.right) {
+  //       queue.push(node.right);
+  //     }
+  //   }
+
+  //   else if (queue.length) {
+  //     queue.push(null);
+  //   }
+
+  // }
+
+  // return height - 1;
+
+  let left = getHeight(rootNode.left);
+  let right = getHeight(rootNode.right);
+
+  return Math.max(left, right) + 1;
 }
 
 function balancedTree (rootNode) {
@@ -92,7 +119,27 @@ function balancedTree (rootNode) {
 }
 
 function countNodes (rootNode) {
-  // Your code here
+  if (!rootNode) return -1;
+
+  let count = 0;
+  const queue = [rootNode];
+
+  while (queue.length) {
+
+    let node = queue.shift();
+
+    if (node.left) {
+      queue.push(node.left);
+    }
+
+    if (node.right) {
+      queue.push(node.right);
+    }
+
+    count++;
+  }
+
+  return count;
 }
 
 function getParentNode (rootNode, target) {
