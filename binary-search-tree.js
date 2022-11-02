@@ -104,7 +104,18 @@ class BinarySearchTree {
 
     // Depth First Traversal - Iterative
     depthFirstTraversal() {
-        // your code here
+        const stack = [this.root]
+        while (queue.length) {
+            let node = stack.pop()
+
+            console.log(node.val)
+            if (node.left) {
+                stack.push(node.left)
+            }
+            if (node.right) {
+                stack.push(node.right)
+            }
+        }
     }
 }
 
